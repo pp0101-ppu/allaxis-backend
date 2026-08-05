@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\InquiryResource;
+use App\Mail\NewInquiryNotification;
 use App\Models\Inquiry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class InquiryController extends Controller
 {
@@ -22,6 +24,7 @@ class InquiryController extends Controller
         ]);
 
         $inquiry = Inquiry::create($validated);
+        Mail::to(config('mail.admin_address'))->send(new NewInquiryNotification($inquiry));
 
         return new InquiryResource($inquiry);
     }

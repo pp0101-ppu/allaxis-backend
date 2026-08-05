@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'admin_address' => env('MAIL_ADMIN_ADDRESS', 'admin@allaxis.com'),
     /*
     |--------------------------------------------------------------------------
     | Default Mailer
